@@ -6,7 +6,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
-use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Foundation\Application;
@@ -40,22 +39,12 @@ class RegisteredUserController extends Controller
         $user->image = $this->generateImage($user);
         $user->save();
 
-        Role::create([
-            'name' => 'admin',
-            'label' => 'Admin',
-        ]);
+        $user->assignRole('user');
 
-        Role::create([
-            'name' => 'user',
-            'label' => 'User',
-        ]);
-
-        $user->assignRole('admin');
-
-        event(new Registered($user));
-
-        $user->sendEmailVerificationNotification();
-        flash('Please check your email for a verification link.')->info();
+        //        event(new Registered($user));
+        //
+        //        $user->sendEmailVerificationNotification();
+        //        flash('Please check your email for a verification link.')->info();
 
         return redirect()->back();
     }
