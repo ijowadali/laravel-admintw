@@ -1,17 +1,16 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@use '@fortawesome/fontawesome-free/css/all.css';
+@use 'flatpickr/dist/flatpickr.css';
+@use 'filepond/dist/filepond.min.css';
 
-@import '@fortawesome/fontawesome-free/css/all.css';
-@import 'flatpickr/dist/flatpickr.css';
-@import 'filepond/dist/filepond.min.css';
-
-@import 'components/alert';
-@import 'components/button';
-@import 'components/card';
-@import 'components/link';
-@import 'typography';
-@import 'utility';
+@use 'components/alert';
+@use 'components/button';
+@use 'components/card';
+@use 'components/link';
+@use 'typography';
+@use 'utility';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
     [x-cloak] {
