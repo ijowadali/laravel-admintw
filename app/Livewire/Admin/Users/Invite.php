@@ -78,7 +78,15 @@ class Invite extends Component
             $user->assignRole($role);
         }
 
-        Mail::send(new SendInviteMail($user));
+        if (config('app.env') === 'production') {
+            Mail::send(new SendInviteMail($user));
+        } else {
+            $user->update([
+                'password' => bcrypt('password'),
+                'is_active' => 1,
+                'email_verified_at' => now(),
+            ]);
+        }
 
         add_user_log([
             'title' => 'invited '.$user->name,
